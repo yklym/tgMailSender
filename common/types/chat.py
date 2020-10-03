@@ -1,7 +1,4 @@
-from enum import Enum
-
-
-class ChatTypes(Enum):
-    PRIVATE = 'private',
-    SUPERGROUP = 'supergroup',
-    GROUP = 'group',
+class ChatTypes:
+    PRIVATE = 'private'
+    SUPERGROUP = 'supergroup'
+    GROUP = 'group'
