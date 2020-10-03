@@ -1,6 +1,11 @@
-from .base import BaseRepository
+from .base import BaseRepositoryClass
 from ..models.types import ModelsTypes
 
 
-class UserRepository(BaseRepository):
+class UserRepositoryClass(BaseRepositoryClass):
     _model = ModelsTypes.USER
+
+
+UserRepository = UserRepositoryClass()
+
+__all__ = ['UserRepository']

@@ -2,15 +2,16 @@ from db.storage import Storage
 from ..models.types import ModelsTypes, models_list
 
 
-class BaseRepository:
+class BaseRepositoryClass:
     _model: ModelsTypes = models_list[ModelsTypes.BASE]
 
     def get_by_id(self, id):
-        return self.storage[id]
+        if id in self.storage:
+            return self.storage[id]
 
     def insert(self, entity) -> bool:
         if entity.id:
-            self.storage[id] = entity
+            self.storage[entity.id] = entity
             return True
         else:
             new_id = self.storage.keys()[-1].id + 1
@@ -35,3 +36,6 @@ class BaseRepository:
     @property
     def model_type(self):
         return models_list[_model]
+
+
+BaseRepository = BaseRepositoryClass()

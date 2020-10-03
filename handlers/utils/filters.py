@@ -6,7 +6,7 @@ def is_private_chat(message):
 
 
 def is_group(message):
-    return message.chat.type == ChatTypes.GROUP or message.chat.type == ChatTypes.SUPERGROUP
+    return message.chat.type == ChatTypes.GROUP or message.chat == ChatTypes.SUPERGROUP
 
 
 def is_authorized(message):
@@ -14,4 +14,4 @@ def is_authorized(message):
 
 
 def apply_many(message, *filters):
-    return all([filter(message) for filter in filters])
+    return all([filter_func(message) for filter_func in filters])
