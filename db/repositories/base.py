@@ -23,7 +23,6 @@ class BaseRepositoryClass:
             del self.storage[id]
             return True
         except e:
-            print(e)
             return False
 
     def update(self, id, entity):
