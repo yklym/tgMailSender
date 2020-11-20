@@ -18,11 +18,13 @@ def apply_many(message, *filters):
     return all([filter_func(message) for filter_func in filters])
 
 
+def check_callback(data, target):
+    return target in data
+
+
 def check_state(message, state):
     db_user = message.db_user
     if db_user:
-        print(db_user)
         curr_state = UserRepository.get_state(db_user.id)
-        print(curr_state)
         return curr_state == state
     return false

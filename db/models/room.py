@@ -11,5 +11,5 @@ class Room(Base):
         self.max_users = max_users
 
     def __repr__(self):
-        return "<User(name='%s', fullname='%s', username='%s', state-'%s')>" % (
-            self.name, self.fullname, self.username, self.state)
+        return "<Room(name='%s', descr='%s', owner_id='%s')>" % (
+            self.id, self.description, self.owner_id)
