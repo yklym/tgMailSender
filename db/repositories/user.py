@@ -11,6 +11,14 @@ class UserRepositoryClass(BaseRepositoryClass):
     def get_state(self, id):
         return self.storage[id].state
 
+    def set_target_room(self, id, room_id):
+        print(self.storage)
+        print(self.storage[id])
+        print(self.storage[id].target_room)
+        print('----------------------------')
+        self.storage[id].target_room = room_id
+        return self.storage[id]
+
 
 UserRepository = UserRepositoryClass()
 

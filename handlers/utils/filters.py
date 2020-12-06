@@ -22,6 +22,10 @@ def check_callback(data, target):
     return target in data
 
 
+def has_subcommand(message, subcommand):
+    return subcommand in message.text
+
+
 def check_state(message, state):
     db_user = message.db_user
     if db_user:

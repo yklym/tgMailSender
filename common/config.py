@@ -9,5 +9,7 @@ ADMIN_CHAT_ID = int(os.getenv("ADMIN_CHAT_ID"))
 
 BOT_TOKEN = str(os.getenv("BOT_TOKEN"))
 
+BOT_URL = str(os.getenv("BOT_LINK"))
+
 WH_SERVER_URL = str(os.getenv("WH_SERVER_URL")) if "WH_SERVER_URL" in list(
     os.environ.keys()) else None
