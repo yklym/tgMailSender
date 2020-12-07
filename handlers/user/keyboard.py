@@ -1,9 +1,9 @@
 from common.config import BOT_URL
 from common.keyboards import remove_keyboard, cabinet_keyboard_markup, \
     main_keyboard_markup, return_to_main_menu_keyboard_markup
-from common.keyboards.types import MainKeyboardTypes, CabinetKeyboardTypes, CommonKeyboardTypes, RoomDetailsTypes
-from common.keyboards_inline import room_invitation_inline_keyboard, room_details_cb, created_room_details_cb
-from common.states import CreateRoomBotState
+from common.keyboards.types import MainKeyboardTypes, CabinetKeyboardTypes, CommonKeyboardTypes, CreatedRoomDetailsTypes
+from common.keyboards_inline import room_details_cb, created_room_details_cb
+from common.states import CreateRoomBotState,NewMessageBotState
 from db.repositories import UserRepository, RoomRepository
 from handlers.utils.filters import is_private_chat
 from loader import bot
@@ -35,7 +35,7 @@ def return_to_main_menu(message):
     bot.send_message(message.chat.id, 'Main menu:', reply_markup=main_keyboard_markup)
 
 
-@bot.message_handler(func=is_private_chat, regexp=RoomDetailsTypes.CREATE_INVITATION)
+@bot.message_handler(func=is_private_chat, regexp=CreatedRoomDetailsTypes.CREATE_INVITATION)
 def get_room_invitation(message):
     response_text = f'{BOT_URL}?start={"_".join(message.db_user.target_room.split(" "))}'
     bot.send_message(message.chat.id, response_text)
@@ -49,3 +49,9 @@ def send_created_rooms(message):
         tmp_room = RoomRepository.get_by_id(room_name)
         bot.send_message(message.chat.id, f'Room:\nName: [{room_name}]\nDescription: [{tmp_room.description}]',
                          reply_markup=created_room_details_cb(room_name))
+
+
+@bot.message_handler(func=is_private_chat, regexp=CreatedRoomDetailsTypes.SEND_MESSAGE)
+def send_message_to_room(message):
+    UserRepository.set_state(message.db_user.id, NewMessageBotState.NEW_MESSAGE)
+    bot.send_message(message.chat.id, 'Запишіть повідомлення:', reply_markup=remove_keyboard)

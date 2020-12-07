@@ -9,6 +9,7 @@ class Room(Base):
         self.participants_ids = participants_ids
         self.owner_id = owner_id
         self.max_users = max_users
+        self.messages = []
 
     def __repr__(self):
         return "<Room(name='%s', descr='%s', owner_id='%s')>" % (

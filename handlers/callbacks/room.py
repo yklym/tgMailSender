@@ -1,4 +1,4 @@
-from common.keyboards import get_room_details_keyboard
+from common.keyboards import get_room_details_keyboard, created_room_keyboard_markup
 from common.keyboards_inline.types import InlineKeyboardsType, CreatedRoomDetailsTypes
 from db.repositories import RoomRepository, UserRepository
 from handlers.utils.filters import check_callback
@@ -20,7 +20,6 @@ def rooms_details(call):
 def created_rooms_details(call):
     room_id = get_call_parameters(call.data, CreatedRoomDetailsTypes.CREATED_ROOMS_DETAILS)[0]
     room = RoomRepository.get_by_id(room_id)
-    keyboard = get_room_details_keyboard(room.is_private)
     UserRepository.set_target_room(call.from_user.id, room_id)
     bot.send_message(call.message.chat.id, f'Your room [{room.id}] details:',
-                     reply_markup=keyboard)
+                     reply_markup=created_room_keyboard_markup)

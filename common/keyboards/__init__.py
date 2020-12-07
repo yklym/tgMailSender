@@ -4,3 +4,4 @@ from .remove_keyboard import *
 from .return_to_cabinet import *
 from .return_to_main_manu import *
 from .room_details import *
+from .created_room_details import *

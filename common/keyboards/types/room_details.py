@@ -1,5 +1,7 @@
+from .created_room_details import CreatedRoomDetailsTypes
+
+
 class RoomDetailsTypes:
-    CREATE_INVITATION = 'Створити запрошення'
-    DETAILS = 'Деталі кінмати'
+    CREATE_INVITATION = CreatedRoomDetailsTypes.CREATE_INVITATION
     SETTINGS = 'Налаштування кімнати'
     GET_LAST_MESSAGES = 'Останні повідомлення'

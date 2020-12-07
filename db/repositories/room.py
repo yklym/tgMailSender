@@ -16,7 +16,8 @@ class RoomRepositoryClass(BaseRepositoryClass):
         if not user_id in room.participants_ids:
             room.participants_ids.append(user_id)
 
-
+    def add_message(self, room_id, text):
+        self.storage[room_id].messages.append(text)
 
 RoomRepository = RoomRepositoryClass()
 
