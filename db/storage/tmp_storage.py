@@ -24,3 +24,7 @@ Storage = {
         'Test room': Room('Test room', mock_user.id, 'test room for tests')
     },
 }
+
+Storage[ModelsTypes.ROOM]['Test room'].messages = ['Hello, it`s a test message!',
+                                                   'Hello, continue testing!',
+                                                   'Here again']
