@@ -16,6 +16,7 @@ class User(Base):
         self.fullname = self.__get_fullname(tg_user.first_name, tg_user.last_name)
         self.username = tg_user.username
         self.target_room = ''
+        self.muted_list = []
 
     @staticmethod
     def __get_fullname(first_name, second_name):

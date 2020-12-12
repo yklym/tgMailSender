@@ -6,8 +6,13 @@ class BaseRepositoryClass:
     _model: ModelsTypes = models_list[ModelsTypes.BASE]
 
     def get_by_id(self, id):
-        if id in self.storage:
-            return self.storage[id]
+        try:
+            if id in self.storage:
+                return self.storage[id]
+            elif int(id) in self.storage:
+                return self.storage[int(id)]
+        except:
+            return None
 
     def insert(self, entity) -> bool:
         if entity.id:
