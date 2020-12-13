@@ -9,7 +9,6 @@ class User(Base):
 
         if not tg_user:
             return
-        print(tg_user)
         self.id = tg_user.id
         self.name = tg_user.first_name
 

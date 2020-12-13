@@ -14,16 +14,17 @@ mock_user_2 = User()
 mock_user_2.id = 346192987
 mock_user_2.name = 'Vlad'
 mock_user_2.username = 'bot_chelovek_1234'
+mock_user_2.fullname = 'Vlad Gleb'
 mock_user_2.target_room = 'Test room'
 mock_user_2.muted_list = []
 
 Storage = {
     ModelsTypes.USER: {
         mock_user.id: mock_user,
-        # mock_user_2.id: mock_user_2
+        mock_user_2.id: mock_user_2
     },
     ModelsTypes.ROOM: {
-        'Test room': Room('Test room', mock_user.id, 'test room for tests', participants_ids=[mock_user_2.id],
+        'Test room': Room('Test room', mock_user.id, 'test room for tests', participants_ids=list([mock_user_2.id]),
                           password='4')
     },
 }

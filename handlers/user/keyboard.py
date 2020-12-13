@@ -53,7 +53,8 @@ def get_room_invitation(message):
 @bot.message_handler(func=is_private_chat, regexp=CabinetKeyboardTypes.MY_ROOMS)
 def send_created_rooms(message):
     rooms_dict = RoomRepository.get_all_ids_by_owner_id(message.db_user.id)
-    bot.send_message(message.chat.id, '<b>Список створених кінмат:</b>:', reply_markup=return_to_main_menu_keyboard_markup)
+    bot.send_message(message.chat.id, '<b>Список створених кінмат:</b>:',
+                     reply_markup=return_to_main_menu_keyboard_markup)
     for room_name in rooms_dict:
         tmp_room = RoomRepository.get_by_id(room_name)
         bot.send_message(message.chat.id, f'<b>Кімната</b>\n'
@@ -81,3 +82,18 @@ def send_message_to_room(message):
                      text=message_view_text(curr_page, pages_amount, target_room_id, last_message),
                      reply_markup=message_viewer_details_cb(curr_page, pages_amount, target_room_id),
                      parse_mode="HTML")
+
+
+@bot.message_handler(func=is_private_chat, regexp=CreatedRoomDetailsTypes.GET_USER_LIST)
+def send_created_rooms(message):
+    room = RoomRepository.get_by_id(message.db_user.target_room)
+
+    ret_string = '<b>Список учасників:</b>\n\n'
+
+    print(room.participants_ids)
+    for user_id in room.participants_ids:
+        print(user_id)
+        user = UserRepository.get_by_id(user_id)
+        ret_string += f'{user.fullname or user.name}  -  @{user.username}'
+
+    bot.send_message(message.chat.id, ret_string, parse_mode='HTML')
